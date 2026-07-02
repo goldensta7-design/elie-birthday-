@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Elie J 💗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink: #FFD1E8;
+    --pink-deep: #FF8FC7;
+    --purple: #C9A7EB;
+    --purple-deep: #8A5FC2;
+    --plum: #4A2F6B;
+    --white: #FFFDFB;
+    --cream: #FFF6FB;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{
+    background: var(--white);
+    color: var(--plum);
+    font-family: 'Quicksand', sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  ::selection{background:var(--pink-deep); color:white;}
+
+  /* ---------- LOADING SCREEN ---------- */
+  #loader{
+    position: fixed; inset:0; z-index: 999;
+    background: linear-gradient(160deg, var(--purple) 0%, var(--pink) 55%, var(--pink-deep) 100%);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+    transition: opacity 0.9s ease, visibility 0.9s ease;
+  }
+  #loader.hide{ opacity:0; visibility:hidden; pointer-events:none; }
+
+  .floaty{
+    position:absolute;
+    font-size: 22px;
+    opacity:0.5;
+    animation: float 7s ease-in-out infinite;
+    user-select:none;
+  }
+  @keyframes float{
+    0%,100%{ transform: translateY(0) rotate(0deg); }
+    50%{ transform: translateY(-40px) rotate(15deg); }
+  }
+
+  .terminal{
+    width: min(88vw, 480px);
+    background: rgba(255,253,251,0.96);
+    border-radius: 22px;
+    box-shadow: 0 20px 60px rgba(74,47,107,0.35);
+    padding: 28px 24px 22px;
+    position: relative;
+    z-index: 2;
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:8px; margin-bottom:16px;
+    font-size: 22px;
+  }
+
+  .terminal-label{
+    font-family:'Quicksand', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--purple-deep);
+    margin-bottom: 14px;
+    opacity: 0.85;
+  }
+
+  #typewriter{
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+    font-size: clamp(15px, 4vw, 17px);
+    line-height: 1.85;
+    min-height: 170px;
+    color: var(--plum);
+  }
+  #typewriter .cursor{
+    display:inline-block;
+    width: 8px; height: 16px;
+    background: var(--pink-deep);
+    margin-left: 2px;
+    animation: blink 0.8s steps(1) infinite;
+    vertical-align: middle;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .progress-track{
+    margin-top: 18px;
+    height: 8px;
+    background: #F3E4F4;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .progress-fill{
+    height:100%;
+    width:0%;
+    background: linear-gradient(90deg, var(--purple-deep), var(--pink-deep));
+    border-radius: 10px;
+    transition: width 0.3s linear;
+  }
+
+  #skip-btn{
+    position:absolute;
+    bottom: 26px; left:50%; transform: translateX(-50%);
+    background: rgba(255,255,255,0.85);
+    border: none;
+    padding: 9px 20px;
+    border-radius: 30px;
+    font-family:'Quicksand', sans-serif;
+    font-weight:600;
+    font-size: 13px;
+    color: var(--purple-deep);
+    cursor:pointer;
+    opacity:0;
+    transition: opacity 0.4s ease;
+    z-index: 2;
+  }
+  #skip-btn.show{ opacity:1; }
+
+  /* ---------- AI WISH VIDEO INTRO ---------- */
+  #ai-intro{
+    position: fixed; inset:0; z-index: 997;
+    background: #1b1024;
+    display:flex; align-items:center; justify-content:center;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.7s ease, visibility 0.7s ease;
+  }
+  #ai-intro.show{ opacity:1; visibility:visible; }
+  #ai-intro.hide{ opacity:0; visibility:hidden; pointer-events:none; }
+  #ai-wish-video{
+    width: 100%; height: 100%;
+    object-fit: contain;
+    background: #1b1024;
+  }
+  #ai-continue-btn{
+    position:absolute;
+    bottom: 30px; left:50%; transform: translateX(-50%);
+    background: rgba(255,255,255,0.9);
+    border:none;
+    padding: 11px 24px;
+    border-radius: 30px;
+    font-family:'Quicksand', sans-serif;
+    font-weight:700;
+    font-size: 13px;
+    color: var(--purple-deep);
+    cursor:pointer;
+    opacity:0;
+    transition: opacity 0.4s ease;
+    z-index: 2;
+  }
+  #ai-continue-btn.show{ opacity:1; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position: relative;
+    min-height: 100vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    overflow:hidden;
+    padding: 40px 20px;
+  }
+  .hero video{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit: cover;
+    z-index:0;
+  }
+  .hero-bg-anim{
+    position:absolute; inset:0;
+    z-index:0;
+    overflow:hidden;
+    background: linear-gradient(135deg, #FFE3F2 0%, var(--pink-deep) 40%, var(--purple-deep) 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 12s ease-in-out infinite;
+  }
+  @keyframes gradientShift{
+    0%,100%{ background-position: 0% 0%; }
+    50%{ background-position: 100% 100%; }
+  }
+  .hero-bg-anim .blob{
+    position:absolute;
+    border-radius: 50%;
+    filter: blur(35px);
+    opacity: 0.75;
+    animation: blobMove 14s ease-in-out infinite;
+  }
+  .hero-bg-anim .b1{
+    width: 60vw; height: 60vw;
+    background: radial-gradient(circle, #FFD1E8, #FF6FB5 70%);
+    top: -18%; left: -18%;
+    animation-duration: 16s;
+  }
+  .hero-bg-anim .b2{
+    width: 55vw; height: 55vw;
+    background: radial-gradient(circle, #C9A7EB, #6B3FA0 70%);
+    bottom: -22%; right: -12%;
+    animation-duration: 19s;
+    animation-delay: 2s;
+  }
+  .hero-bg-anim .b3{
+    width: 42vw; height: 42vw;
+    background: radial-gradient(circle, #FFF3FA, #FFB3DA 70%);
+    top: 32%; right: 12%;
+    animation-duration: 13s;
+    animation-delay: 1s;
+  }
+  .hero-glow{
+    position:absolute;
+    top: 50%; left:50%;
+    width: 340px; height: 340px;
+    transform: translate(-50%,-50%);
+    background: radial-gradient(circle, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0) 70%);
+    z-index:2;
+    pointer-events:none;
+    animation: glowPulse 4s ease-in-out infinite;
+  }
+  @keyframes glowPulse{
+    0%,100%{ opacity: 0.7; }
+    50%{ opacity: 1; }
+  }
+  .hero-confetti{
+    position:absolute; inset:0;
+    z-index: 2;
+    pointer-events:none;
+  }
+  .hero-confetti span{
+    position:absolute;
+    width: 8px; height: 12px;
+    top: -5%;
+    opacity: 0.85;
+    animation: heroConfettiFall linear infinite;
+  }
+  @keyframes heroConfettiFall{
+    0%{ transform: translateY(0) rotate(0deg); }
+    100%{ transform: translateY(115vh) rotate(400deg); }
+  }
+  .hero-overlay{
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(201,167,235,0.28) 0%, rgba(255,209,232,0.38) 60%, var(--white) 100%);
+    z-index:1;
+  }
+  .hero-content{ position:relative; z-index:3; }
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--plum);
+    background: rgba(255,255,255,0.6);
+    padding: 6px 16px;
+    border-radius: 20px;
+    display:inline-block;
+    margin-bottom: 22px;
+  }
+  h1.hero-title{
+    font-family:'Fredoka', sans-serif;
+    font-weight:700;
+    font-size: clamp(2.4rem, 9vw, 4.6rem);
+    color: var(--plum);
+    line-height: 1.05;
+    text-shadow: 0 4px 24px rgba(255,255,255,0.5);
+  }
+  .hero-title .accent{ color: var(--pink-deep); }
+  .hero-sub{
+    font-family:'Caveat', cursive;
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    color: var(--purple-deep);
+    margin-top: 10px;
+  }
+  .hero-age{
+    margin-top: 30px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: linear-gradient(135deg, #ffffff, #FFF0F8);
+    padding: 14px 28px 14px 20px;
+    border-radius: 50px;
+    box-shadow: 0 14px 34px rgba(138,95,194,0.32), inset 0 0 0 2px rgba(255,255,255,0.6);
+    border: 2px solid var(--pink);
+    animation: age-pulse 2.6s ease-in-out infinite;
+  }
+  @keyframes age-pulse{
+    0%,100%{ transform: scale(1); box-shadow: 0 14px 34px rgba(138,95,194,0.32), inset 0 0 0 2px rgba(255,255,255,0.6); }
+    50%{ transform: scale(1.035); box-shadow: 0 18px 42px rgba(255,143,199,0.42), inset 0 0 0 2px rgba(255,255,255,0.8); }
+  }
+  .age-number{
+    font-family:'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: 34px;
+    background: linear-gradient(135deg, var(--pink-deep), var(--purple-deep));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1;
+  }
+  .age-text{
+    text-align: left;
+    line-height: 1.25;
+  }
+  .age-text .age-top{
+    font-family:'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--purple-deep);
+    display:block;
+  }
+  .age-text .age-bottom{
+    font-family:'Caveat', cursive;
+    font-size: 17px;
+    color: var(--pink-deep);
+    display:block;
+  }
+  .age-star{
+    position:absolute;
+    font-size: 16px;
+    animation: twinkle 1.8s ease-in-out infinite;
+  }
+  .age-star.s1{ top:-10px; left:-6px; animation-delay: 0s; }
+  .age-star.s2{ top:-12px; right:10px; animation-delay: 0.6s; }
+  .age-star.s3{ bottom:-8px; right:-8px; animation-delay: 1.1s; }
+  @keyframes twinkle{
+    0%,100%{ opacity:0.4; transform: scale(0.8) rotate(0deg); }
+    50%{ opacity:1; transform: scale(1.15) rotate(15deg); }
+  }
+  .scroll-hint{
+    margin-top: 50px;
+    font-size: 13px;
+    color: var(--purple-deep);
+    opacity:0.7;
+    animation: bob 2s ease-in-out infinite;
+  }
+  @keyframes bob{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(8px);} }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{ padding: 90px 20px; position:relative; }
+  .section-inner{ max-width: 880px; margin:0 auto; }
+  .section-eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--purple-deep);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  h2.section-title{
+    font-family:'Fredoka', sans-serif;
+    font-weight:600;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    color: var(--plum);
+    margin-bottom: 40px;
+  }
+
+  /* ---------- PANELS (dedication style) ---------- */
+  /* ---------- VIDEO WISHES ---------- */
+  .video-card{
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(138,95,194,0.3);
+    background: linear-gradient(150deg, var(--pink) 0%, var(--purple) 100%);
+  }
+  .video-card video{
+    width: 100%;
+    display:block;
+    aspect-ratio: 16/9;
+    background: var(--plum);
+  }
+  .video-badge{
+    position:absolute;
+    top: 16px; left: 16px;
+    background: rgba(255,255,255,0.9);
+    color: var(--purple-deep);
+    font-family:'Space Mono', monospace;
+    font-size: 11px;
+    padding: 7px 14px;
+    border-radius: 20px;
+    z-index: 3;
+  }
+  .video-caption{
+    font-family:'Caveat', cursive;
+    font-size: 1.3rem;
+    color: var(--purple-deep);
+    text-align:center;
+    margin-top: 18px;
+  }
+
+  .panels-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  @media(max-width:560px){ .panels-grid{ grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+  .panel{
+    aspect-ratio: 4/5;
+    border-radius: 20px;
+    background: linear-gradient(150deg, var(--pink) 0%, var(--purple) 100%);
+    position:relative;
+    overflow:hidden;
+    display:flex; align-items:flex-end;
+    box-shadow: 0 14px 30px rgba(138,95,194,0.22);
+  }
+  .panel img{
+    position:absolute; inset:0;
+    width:100%; height:100%; object-fit:cover;
+  }
+  .panel-placeholder{
+    position:absolute; inset:0;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:8px;
+    color: rgba(74,47,107,0.55);
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    text-align:center;
+    padding: 20px;
+  }
+  .panel-placeholder .icon{ font-size: 26px; }
+  .panel-caption{
+    position:relative; z-index:2;
+    width:100%;
+    padding: 14px 16px;
+    background: linear-gradient(0deg, rgba(74,47,107,0.55), transparent);
+    color: white;
+    font-family:'Caveat', cursive;
+    font-size: 20px;
+  }
+
+  /* ---------- LETTER ---------- */
+  .letter-card{
+    background: var(--cream);
+    border-radius: 26px;
+    padding: 44px clamp(24px, 6vw, 56px);
+    box-shadow: 0 18px 50px rgba(138,95,194,0.18);
+    border: 1px solid #F3DCEE;
+  }
+  .letter-card p{
+    font-family:'Caveat', cursive;
+    font-size: clamp(1.35rem, 3.6vw, 1.7rem);
+    line-height: 1.7;
+    color: var(--plum);
+  }
+  .letter-card p + p{ margin-top: 14px; }
+  .signoff{
+    margin-top: 26px;
+    font-family:'Caveat', cursive;
+    font-size: 1.9rem;
+    color: var(--pink-deep);
+    text-align:right;
+  }
+
+  /* ---------- WISH REVEAL CARD ---------- */
+  .console-box{
+    background: linear-gradient(160deg, #FBEAF5, var(--pink) 120%);
+    border-radius: 26px;
+    padding: 34px 28px;
+    box-shadow: 0 18px 50px rgba(138,95,194,0.22);
+    border: 1px solid #F3DCEE;
+    text-align: center;
+  }
+  .console-topbar{
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom: 10px;
+    font-size: 26px;
+  }
+  #console-output{
+    font-family:'Caveat', cursive;
+    font-size: clamp(1.3rem, 4vw, 1.6rem);
+    color: var(--plum);
+    line-height: 1.8;
+    min-height: 140px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .run-btn{
+    margin-top: 12px;
+    background: linear-gradient(90deg, var(--pink-deep), var(--purple-deep));
+    color:white;
+    border:none;
+    font-family:'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 13px 26px;
+    border-radius: 30px;
+    cursor:pointer;
+    box-shadow: 0 10px 24px rgba(255,143,199,0.35);
+  }
+  .run-btn:active{ transform: scale(0.97); }
+
+  /* ---------- TAGS ---------- */
+  .tags-wrap{ display:flex; flex-wrap:wrap; gap: 12px; }
+  .tag{
+    font-family:'Quicksand', sans-serif;
+    font-weight:600;
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    background: white;
+    border: 2px solid var(--pink);
+    color: var(--purple-deep);
+    box-shadow: 0 6px 16px rgba(138,95,194,0.12);
+  }
+
+  /* ---------- FOOTER / HUG BUTTON ---------- */
+  footer{
+    text-align:center;
+    padding: 80px 20px 60px;
+    background: linear-gradient(180deg, var(--white), var(--pink) 200%);
+    position:relative;
+    overflow:hidden;
+  }
+  .hug-btn{
+    background: var(--pink-deep);
+    color:white;
+    border:none;
+    font-family:'Fredoka', sans-serif;
+    font-weight:600;
+    font-size: 16px;
+    padding: 16px 34px;
+    border-radius: 40px;
+    cursor:pointer;
+    box-shadow: 0 14px 30px rgba(255,143,199,0.4);
+  }
+  .hug-btn:active{ transform: scale(0.96); }
+  footer .foot-note{
+    margin-top: 26px;
+    font-family:'Caveat', cursive;
+    font-size: 1.4rem;
+    color: var(--purple-deep);
+  }
+  .heart-burst{
+    position:fixed;
+    font-size: 20px;
+    pointer-events:none;
+    z-index: 500;
+    animation: burst 1.6s ease-out forwards;
+  }
+  @keyframes burst{
+    0%{ transform: translateY(0) scale(1); opacity:1; }
+    100%{ transform: translateY(-160px) scale(1.4); opacity:0; }
+  }
+
+  /* ---------- OUR SONG PLAYER ---------- */
+  .song-card{
+    background: linear-gradient(150deg, var(--purple-deep), var(--pink-deep));
+    border-radius: 26px;
+    padding: 34px 28px;
+    box-shadow: 0 22px 55px rgba(138,95,194,0.4);
+    display:flex; flex-direction:column; align-items:center; gap:18px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .song-card::before{
+    content:'';
+    position:absolute; inset:0;
+    background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.18), transparent 55%);
+    pointer-events:none;
+  }
+  .song-disc{
+    width: 92px; height: 92px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, #fff, var(--pink) 30%, var(--plum) 100%);
+    display:flex; align-items:center; justify-content:center;
+    font-size: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    animation: spin 6s linear infinite;
+    animation-play-state: paused;
+  }
+  .song-disc.playing{ animation-play-state: running; }
+  @keyframes spin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+
+  .song-title{
+    font-family:'Fredoka', sans-serif;
+    font-weight:600;
+    font-size: 18px;
+    color: white;
+  }
+  .song-sub{
+    font-family:'Caveat', cursive;
+    font-size: 1.25rem;
+    color: rgba(255,255,255,0.85);
+  }
+  .eq-bars{
+    display:flex; align-items:flex-end; gap:4px;
+    height: 26px;
+  }
+  .eq-bars span{
+    width:4px;
+    background: white;
+    border-radius: 3px;
+    height: 8px;
+    animation: eq 1s ease-in-out infinite;
+    animation-play-state: paused;
+  }
+  .eq-bars.playing span{ animation-play-state: running; }
+  .eq-bars span:nth-child(1){ animation-delay: 0s; }
+  .eq-bars span:nth-child(2){ animation-delay: 0.15s; }
+  .eq-bars span:nth-child(3){ animation-delay: 0.3s; }
+  .eq-bars span:nth-child(4){ animation-delay: 0.45s; }
+  .eq-bars span:nth-child(5){ animation-delay: 0.2s; }
+  @keyframes eq{
+    0%,100%{ height:6px; }
+    50%{ height:24px; }
+  }
+  .song-play-btn{
+    background: white;
+    color: var(--purple-deep);
+    border:none;
+    font-family:'Fredoka', sans-serif;
+    font-weight:600;
+    font-size: 15px;
+    padding: 13px 30px;
+    border-radius: 30px;
+    cursor:pointer;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.2);
+    position: relative; z-index:2;
+  }
+  .song-play-btn:active{ transform: scale(0.96); }
+
+  /* ---------- AMBIENT SPARKLES (global) ---------- */
+  .ambient-sparkle{
+    position:absolute;
+    font-size: 30px;
+    opacity: 0.85;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
+    animation: float 7s ease-in-out infinite;
+    pointer-events:none;
+    z-index: 2;
+  }
+
+  /* ---------- CONFETTI ---------- */
+  .confetti-piece{
+    position: fixed;
+    top: -20px;
+    width: 9px; height: 14px;
+    z-index: 998;
+    pointer-events:none;
+    animation: confetti-fall linear forwards;
+  }
+  @keyframes confetti-fall{
+    to{ transform: translateY(110vh) rotate(540deg); opacity: 0.9; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= LOADER ================= -->
+<div id="loader">
+  <span class="floaty" style="top:10%; left:8%;">💜</span>
+  <span class="floaty" style="top:20%; right:10%; animation-delay:1s;">✨</span>
+  <span class="floaty" style="bottom:15%; left:12%; animation-delay:2s;">💗</span>
+  <span class="floaty" style="bottom:25%; right:14%; animation-delay:0.5s;">{ }</span>
+  <span class="floaty" style="top:60%; left:5%; animation-delay:1.5s;">🌸</span>
+  <span class="floaty" style="top:8%; right:30%; animation-delay:2.5s;">&lt;/&gt;</span>
+
+  <div class="terminal">
+    <div class="terminal-bar">🎀🎂🎈</div>
+    <div class="terminal-label">opening your birthday card...</div>
+    <div id="typewriter"><span class="cursor"></span></div>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+  </div>
+
+  <button id="skip-btn">tap to open your gift →</button>
+</div>
+
+<!-- ================= AI WISH VIDEO INTRO ================= -->
+<div id="ai-intro">
+  <video id="ai-wish-video" playsinline autoplay>
+    <source src="ai-wish.mp4" type="video/mp4">
+  </video>
+  <button id="ai-continue-btn">continue →</button>
+</div>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="hero-bg-anim">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+  </div>
+  <div class="hero-glow"></div>
+  <div class="hero-confetti">
+    <span style="left:8%; background:#FF8FC7; animation-duration:6s; animation-delay:0s;"></span>
+    <span style="left:22%; background:#C9A7EB; animation-duration:7.5s; animation-delay:1s; border-radius:50%;"></span>
+    <span style="left:38%; background:#FFD1E8; animation-duration:5.5s; animation-delay:2s;"></span>
+    <span style="left:55%; background:#8A5FC2; animation-duration:8s; animation-delay:0.5s; border-radius:50%;"></span>
+    <span style="left:70%; background:#FF6FB5; animation-duration:6.5s; animation-delay:1.5s;"></span>
+    <span style="left:85%; background:#FFF3FA; animation-duration:7s; animation-delay:2.5s; border-radius:50%;"></span>
+    <span style="left:92%; background:#C9A7EB; animation-duration:6.8s; animation-delay:0.8s;"></span>
+  </div>
+  <div class="hero-overlay"></div>
+  <span class="ambient-sparkle" style="top:12%; left:10%;">✨</span>
+  <span class="ambient-sparkle" style="top:18%; right:12%; animation-delay:1.5s;">💗</span>
+  <span class="ambient-sparkle" style="bottom:20%; left:8%; animation-delay:0.8s;">🌸</span>
+  <span class="ambient-sparkle" style="bottom:14%; right:10%; animation-delay:2.2s;">💜</span>
+  <span class="ambient-sparkle" style="top:45%; left:5%; animation-delay:3s;">✨</span>
+  <span class="ambient-sparkle" style="top:40%; right:6%; animation-delay:1s;">🎀</span>
+  <span class="ambient-sparkle" style="top:8%; left:45%; animation-delay:2.6s;">⭐</span>
+  <span class="ambient-sparkle" style="bottom:8%; left:40%; animation-delay:1.8s;">✨</span>
+  <div class="hero-content">
+    <span class="eyebrow">FROM YOUR BROTHER, WITH LOVE</span>
+    <h1 class="hero-title">Happy Birthday,<br><span class="accent">Elie J</span> 🎂</h1>
+    <p class="hero-sub">Eniola Eliana Joseph</p>
+    <div class="hero-age">
+      <span class="age-star s1">✨</span>
+      <span class="age-star s2">⭐</span>
+      <span class="age-star s3">✨</span>
+      <span class="age-number">11</span>
+      <span class="age-text">
+        <span class="age-top">years old today</span>
+        <span class="age-bottom">happiest birthday, Elie J 🎈</span>
+      </span>
+    </div>
+    <div class="scroll-hint">↓ scroll down, I made you something ↓</div>
+  </div>
+</section>
+
+<!-- ================= VIDEO WISHES ================= -->
+<section id="wishes">
+  <div class="section-inner">
+    <div class="section-eyebrow">from the people who love you</div>
+    <h2 class="section-title">Everyone wanted to say something</h2>
+    <div class="video-card">
+      <span class="video-badge">▶ birthday wishes</span>
+      <video controls playsinline poster="" preload="metadata">
+        <source src="wishes-video.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="video-caption">tap play — this one's from all of us 💜</p>
+  </div>
+</section>
+
+<!-- ================= PICTURE PANELS ================= -->
+<section id="panels">
+  <div class="section-inner">
+    <div class="section-eyebrow">a little dedication</div>
+    <h2 class="section-title">Moments with my favorite person</h2>
+    <div class="panels-grid">
+      <div class="panel">
+        <img src="photo1.jpg" alt="" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'">
+        <div class="panel-placeholder"><span class="icon">📷</span>drop photo1.jpg here</div>
+        <div class="panel-caption">my little coder</div>
+      </div>
+      <div class="panel">
+        <img src="photo2.jpg" alt="" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'">
+        <div class="panel-placeholder"><span class="icon">📷</span>drop photo2.jpg here</div>
+        <div class="panel-caption">my storyteller</div>
+      </div>
+      <div class="panel">
+        <img src="photo3.jpg" alt="" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'">
+        <div class="panel-placeholder"><span class="icon">📷</span>drop photo3.jpg here</div>
+        <div class="panel-caption">my little artist</div>
+      </div>
+      <div class="panel">
+        <img src="photo4.jpg" alt="" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'">
+        <div class="panel-placeholder"><span class="icon">📷</span>drop photo4.jpg here</div>
+        <div class="panel-caption">my dreamer</div>
+      </div>
+      <div class="panel">
+        <img src="photo5.jpg" alt="" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'">
+        <div class="panel-placeholder"><span class="icon">📷</span>drop photo5.jpg here</div>
+        <div class="panel-caption">my sunshine</div>
+      </div>
+      <div class="panel">
+        <img src="photo6.jpg" alt="" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'">
+        <div class="panel-placeholder"><span class="icon">📷</span>drop photo6.jpg here</div>
+        <div class="panel-caption">forever my favorite</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= OUR SONG ================= -->
+<section id="song">
+  <div class="section-inner">
+    <div class="section-eyebrow">made for you</div>
+    <h2 class="section-title">A song, just for us</h2>
+    <div class="song-card">
+      <div class="song-disc" id="song-disc">🎵</div>
+      <div class="song-title">Elie J's Song</div>
+      <div class="song-sub">a little something I made thinking of you</div>
+      <div class="eq-bars" id="eq-bars"><span></span><span></span><span></span><span></span><span></span></div>
+      <button class="song-play-btn" id="song-btn" onclick="toggleSong()">▶ play our song</button>
+      <audio id="our-song" src="our-song.mp3" preload="metadata"></audio>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LETTER ================= -->
+<section id="letter">
+  <div class="section-inner">
+    <div class="section-eyebrow">a letter for you</div>
+    <h2 class="section-title">Something I need to say</h2>
+    <div class="letter-card">
+      <p>Elie J,</p>
+      <p>I couldn't be there today, and I didn't have anything to hand you wrapped in paper — and I'm sorry for that. But I refused to let today pass without you feeling how loved you are.</p>
+      <p>So instead of a gift I bought, I built you one. Line by line, the way you build your own little worlds when you code, write your stories, and draw. I wanted you to open something and know it was made just for you, by someone who's paying attention.</p>
+      <p>Eleven looks so good on you. Keep coding, keep writing your stories, keep drawing everything you imagine — you are going to build incredible things. I promise I'll make this up to you properly soon. Until then, this is yours.</p>
+      <p class="signoff">— your brother, always in your corner 💜</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WISH REVEAL ================= -->
+<section id="console">
+  <div class="section-inner">
+    <div class="section-eyebrow">one more thing</div>
+    <h2 class="section-title">A little wish, just for you</h2>
+    <div class="console-box">
+      <div class="console-topbar">🎁</div>
+      <div id="console-output">tap the button to open it 💌</div>
+      <button class="run-btn" onclick="runConsole()">open my wish</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TAGS ================= -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-eyebrow">things I love about you</div>
+    <h2 class="section-title">Elie J, in a few words</h2>
+    <div class="tags-wrap">
+      <span class="tag">🧩 builds worlds in Scratch & Alice</span>
+      <span class="tag">📖 writes stories from scratch</span>
+      <span class="tag">🎨 draws everything she imagines</span>
+      <span class="tag">💗 pink & purple everything</span>
+      <span class="tag">🎧 always has a song playing</span>
+      <span class="tag">🎬 secretly a romantic at heart</span>
+      <span class="tag">✨ the most creative person I know</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <h2 class="section-title" style="margin-bottom:18px;">One more thing before you go</h2>
+  <button class="hug-btn" onclick="sendHug(event)">tap for a hug from me 🤗</button>
+  <p class="foot-note">Happy Birthday, Elie J. I love you endlessly.</p>
+</footer>
+
+<script>
+  // ---------------- TYPEWRITER LOADER ----------------
+  const lines = [
+    "Hii Elie J 🎀",
+    "",
+    "Happy Birthday! 🎂💗",
+    "",
+    "I'm sorry I couldn't be there today,",
+    "and sorry I didn't get you a gift this year 🥺",
+    "",
+    "But I promise... I'll make it up to you 💜",
+    "",
+    "So instead, I made you this —",
+    "just for you 🌸",
+    "",
+    "give me a second, it's almost ready ✨"
+  ];
+
+  const el = document.getElementById('typewriter');
+  const cursor = document.createElement('span');
+  cursor.className = 'cursor';
+  const fill = document.getElementById('progress-fill');
+  const skipBtn = document.getElementById('skip-btn');
+  const loader = document.getElementById('loader');
+
+  const totalDuration = 12000; // 12 seconds
+  const totalChars = lines.join('\n').length;
+  let elapsedChars = 0;
+  let buffer = "";
+  let lineIndex = 0;
+  let charIndex = 0;
+
+  function typeStep(){
+    if(lineIndex >= lines.length){
+      cursor.remove();
+      el.appendChild(cursor);
+      return;
+    }
+    const currentLine = lines[lineIndex];
+    if(charIndex < currentLine.length){
+      buffer += currentLine[charIndex];
+      charIndex++;
+      elapsedChars++;
+    } else {
+      buffer += "\n";
+      lineIndex++;
+      charIndex = 0;
+      elapsedChars++;
+    }
+    el.textContent = buffer;
+    el.appendChild(cursor);
+    fill.style.width = Math.min(100, (elapsedChars/totalChars)*100) + "%";
+
+    const perCharDelay = totalDuration / totalChars;
+    if(lineIndex < lines.length){
+      setTimeout(typeStep, perCharDelay);
+    }
+  }
+  typeStep();
+
+  setTimeout(()=>{ skipBtn.classList.add('show'); }, 2000);
+  setTimeout(()=>{ closeLoader(); }, totalDuration + 800);
+
+  function closeLoader(){
+    loader.classList.add('hide');
+    showAiIntro();
+  }
+  skipBtn.addEventListener('click', closeLoader);
+
+  // ---------------- AI WISH VIDEO INTRO ---------------- 
+  const aiIntro = document.getElementById('ai-intro');
+  const aiVideo = document.getElementById('ai-wish-video');
+  const aiContinueBtn = document.getElementById('ai-continue-btn');
+  let aiIntroDone = false;
+
+  function showAiIntro(){
+    aiIntro.classList.add('show');
+    aiVideo.play().catch(()=>{});
+    setTimeout(()=>{ aiContinueBtn.classList.add('show'); }, 2000);
+  }
+  function finishAiIntro(){
+    if(aiIntroDone) return;
+    aiIntroDone = true;
+    aiIntro.classList.add('hide');
+    launchConfetti();
+    startSongAutoplay();
+  }
+  aiVideo.addEventListener('ended', finishAiIntro);
+  aiContinueBtn.addEventListener('click', finishAiIntro);
+  // safety fallback in case the video file is missing/fails to load
+  aiVideo.addEventListener('error', finishAiIntro);
+
+  // ---------------- WISH REVEAL ----------------
+  let consoleRan = false;
+  function runConsole(){
+    if(consoleRan) return;
+    consoleRan = true;
+    const out = document.getElementById('console-output');
+    out.style.opacity = 0;
+    setTimeout(()=>{
+      out.textContent = "Happy Birthday Elie J — the world is lucky to have you. 💗";
+      out.style.transition = "opacity 0.6s ease";
+      out.style.opacity = 1;
+    }, 300);
+  }
+
+  // ---------------- SONG PLAYER ----------------
+  const songAudio = document.getElementById('our-song');
+  const songBtn = document.getElementById('song-btn');
+  const songDisc = document.getElementById('song-disc');
+  const eqBars = document.getElementById('eq-bars');
+  let songPlaying = false;
+  function toggleSong(){
+    if(!songPlaying){
+      startSongAutoplay();
+    } else {
+      songAudio.pause();
+      songBtn.textContent = "▶ play our song";
+      songDisc.classList.remove('playing');
+      eqBars.classList.remove('playing');
+      songPlaying = false;
+    }
+  }
+  function startSongAutoplay(){
+    if(songPlaying) return;
+    const playPromise = songAudio.play();
+    songBtn.textContent = "⏸ pause";
+    songDisc.classList.add('playing');
+    eqBars.classList.add('playing');
+    songPlaying = true;
+    if(playPromise !== undefined){
+      playPromise.catch(()=>{
+        // browser blocked autoplay (no user gesture yet) — reset to manual play state
+        songBtn.textContent = "▶ play our song";
+        songDisc.classList.remove('playing');
+        eqBars.classList.remove('playing');
+        songPlaying = false;
+      });
+    }
+  }
+  songAudio.addEventListener('ended', ()=>{
+    songBtn.textContent = "▶ play our song";
+    songDisc.classList.remove('playing');
+    eqBars.classList.remove('playing');
+    songPlaying = false;
+  });
+
+  // ---------------- CONFETTI BURST ON OPEN ----------------
+  function launchConfetti(){
+    const colors = ['#FF8FC7','#C9A7EB','#FFD1E8','#8A5FC2','#ffffff'];
+    for(let i=0;i<60;i++){
+      const p = document.createElement('div');
+      p.className = 'confetti-piece';
+      p.style.left = Math.random()*100 + 'vw';
+      p.style.background = colors[Math.floor(Math.random()*colors.length)];
+      p.style.animationDuration = (2.5 + Math.random()*2) + 's';
+      p.style.animationDelay = (Math.random()*0.6) + 's';
+      p.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      document.body.appendChild(p);
+      setTimeout(()=>p.remove(), 5000);
+    }
+  }
+
+  // ---------------- HUG BUTTON ----------------
+  function sendHug(e){
+    const hearts = ['💗','💜','✨','🤗','🌸'];
+    for(let i=0;i<10;i++){
+      const h = document.createElement('span');
+      h.className = 'heart-burst';
+      h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+      h.style.left = (e.clientX + (Math.random()*100-50)) + 'px';
+      h.style.top = (e.clientY) + 'px';
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(), 1600);
+    }
+  }
+</script>
+
+</body>
+</html>
